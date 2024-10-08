@@ -14,6 +14,7 @@ public class StringProcessor {
     }
     public static int CountEntry(String s1, String s2) {
         int count = 0;
+        String buffer = s1;
         if (s2.isEmpty() || s2 == null) throw new IllegalArgumentException("String is empty");
         while (s1.indexOf(s2) != -1) {
             count++;

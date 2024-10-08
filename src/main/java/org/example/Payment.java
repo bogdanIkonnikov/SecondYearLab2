@@ -47,10 +47,6 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" +
-                "fio='" + fio + '\'' +
-                ", date=" + Arrays.toString(date) +
-                ", pay=" + pay +
-                '}';
+        return String.format("Плательщик: %s, дата: %d.%d.%d сумма: %d руб. %d коп.",fio,date[0],date[1],date[2],pay/100,pay%100);
     }
 }
