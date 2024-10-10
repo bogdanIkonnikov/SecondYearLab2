@@ -10,6 +10,11 @@ public class FinanceReport {
         this.fio = fio;
         this.date = date;
     }
+    public FinanceReport() {
+        this.pays = new Payment[] {};
+        this.fio = "none";
+        this.date = new int[] {0,0,0};
+    }
     public int getQuantityPayments(){
         return pays.length;
     }
@@ -30,5 +35,10 @@ public class FinanceReport {
         return String.format("[Автор: %s, дата: %d.%d.%d" +
                 "\nПлатежи: [\n%s ... ]]",
                 fio,date[0],date[1],date[2], Pays);
+    }
+    public void copyFrom(FinanceReport financeReport){
+        this.pays = financeReport.pays;
+        this.date = financeReport.date;
+        this.fio = financeReport.fio;
     }
 }
