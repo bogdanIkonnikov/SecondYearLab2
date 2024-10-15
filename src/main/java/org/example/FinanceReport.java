@@ -18,7 +18,7 @@ public class FinanceReport {
     public int getQuantityPayments(){
         return pays.length;
     }
-    public Payment qetPayment(int index){
+    public Payment getPayment(int index){
         return pays[index];
     }
     public void setPayment(int index,Payment payment){

@@ -18,7 +18,7 @@ public class FinanceMain {
                 new int[] {10,10,2024});
         System.out.println("Количество платежей: " + report.getQuantityPayments());
         report.setPayment(3, payment2);
-        System.out.println(report.qetPayment(3).toString());
+        System.out.println(report.getPayment(3).toString());
 
         //9
         System.out.println(report.toString());

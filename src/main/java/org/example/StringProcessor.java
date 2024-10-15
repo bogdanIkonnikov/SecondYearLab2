@@ -1,49 +1,49 @@
 package org.example;
 
-import javax.management.StringValueExp;
-
 public class StringProcessor {
-    public static String StringMultiply(String s, int N) {
+    public static String multiplyString(String s, int N) {
         if (N == 0) return "";
         if (N < 0) throw new IllegalArgumentException("Index out of range");
-        String sOut = "";
-        for (int i = 0;i<N;i++){
-            sOut += s;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            result.append(s);
         }
-        return sOut;
+        return result.toString();
     }
-    public static int CountEntry(String s1, String s2) {
+
+    public static int countEntry(String s1, String s2) {
         int count = 0;
-        String buffer = s1;
-        if (s2.isEmpty() || s2 == null) throw new IllegalArgumentException("String is empty");
-        while (s1.indexOf(s2) != -1) {
-            count++;
-            s1 = s1.replaceFirst(s2,"");
+        if (s2.isEmpty()) throw new IllegalArgumentException("String is empty");
+        for(int i = 0; i <= s1.length() - s2.length(); i++){
+            if (s1.startsWith(s2, i)){
+                count++;
+            }
         }
         return count;
     }
-    public static String ReplaceNumbers(String s) {
+
+    public static String replaceNumbers(String s) {
         String sOut;
-        sOut = s.replace("1","один")
-                .replace("2","два")
-                .replace("3","три");
+        sOut = s.replace("1", "один")
+                .replace("2", "два")
+                .replace("3", "три");
         return sOut;
     }
-    public static void StringDel(StringBuilder stringBuilder) {
+    public static StringBuilder stringDel(StringBuilder stringBuilder) {
         for(int i = 1; i < stringBuilder.length(); i++) {
-            System.out.println(i);
             stringBuilder.deleteCharAt(i);
         }
+        return stringBuilder;
     }
 
-    public static String StringReverse(String string) {
+    public static String stringReverse(String string) {
         char[] arr = new char[string.length()];
         int j = string.length() - 1;
         char buffer;
-        for (int i = 0;i < string.length();i++) {
+        for (int i = 0; i < string.length(); i++) {
             arr[i] = string.charAt(i);
         }
-        for (int i = 0;i < string.length();i++) {
+        for (int i = 0; i < string.length(); i++) {
             if (j == i) break;
             if (arr[i] != ' ') {
                 while (arr[j] == ' ') {
@@ -59,14 +59,14 @@ public class StringProcessor {
         return new String(arr);
     }
 
-    public static String Numbs(String start){
+    public static String numbs(String start) {
         int cutIndex, cutElement, stepen, sum = 0;
-        for (int i = 0; i < start.length(); i++){
-            cutIndex = start.indexOf("0x")+2; // нашли число
+        for (int i = 0; i < start.length(); i++) {
+            cutIndex = start.indexOf("0x") + 2; // нашли число
             if (start.contains("0x")) {
                 //проверяем буковки
-                for (int j = 0;j < 8;j++){ //преобразовали в 10-ую
-                    switch (start.charAt(cutIndex+j)){
+                for (int j = 0; j < 8; j++) { //преобразовали в 10-ую
+                    switch (start.charAt(cutIndex + j)) {
                         case 'A':
                             cutElement = 10;
                             break;
@@ -86,14 +86,14 @@ public class StringProcessor {
                             cutElement = 15;
                             break;
                         default:
-                            cutElement = Character.getNumericValue(start.charAt(cutIndex+j));
+                            cutElement = Character.getNumericValue(start.charAt(cutIndex + j));
                             break;
                     }
-                    stepen = (int) Math.pow(16,7-j);
+                    stepen = (int) Math.pow(16, 7 - j);
                     sum += cutElement * stepen;
                 }
 
-                start = start.replace(start.substring(cutIndex-2,cutIndex+8), String.valueOf(sum));
+                start = start.replace(start.substring(cutIndex - 2, cutIndex + 8), String.valueOf(sum));
             }
             sum = 0;
         }
