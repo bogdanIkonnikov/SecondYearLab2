@@ -28,8 +28,11 @@ public class FinanceReport {
     public String toString(){
         String Pays = "";
         for (int index = 0;index<pays.length;index++){
-            Pays += pays[index].toString();
-            Pays += "\n";
+            if(pays[index] == null) break;
+            else{
+                Pays += pays[index].toString();
+                Pays += "\n";
+            }
         }
 
         return String.format("[Автор: %s, дата: %d.%d.%d" +
