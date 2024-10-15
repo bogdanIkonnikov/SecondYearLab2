@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class Payment {
     private String fio;
-    private int[] date;
+    private String date;
     private int pay;
-    public Payment(String fio, int[] date, int pay) {
+    public Payment(String fio, String date, int pay) {
         this.fio = fio;
         this.date = date;
         this.pay = pay;
@@ -19,13 +19,13 @@ public class Payment {
     public String getFio() {
         return fio;
     }
-    public int[] getDate() {
+    public String getDate() {
         return date;
     }
     public void setFio(String fio) {
         this.fio = fio;
     }
-    public void setDate(int[] date) {
+    public void setDate(String date) {
         this.date = date;
     }
     public void setPay(int pay) {
@@ -36,17 +36,17 @@ public class Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return pay == payment.pay && fio.equals(payment.fio) && Arrays.equals(date, payment.date);
+        return pay == payment.pay && fio.equals(payment.fio) && Arrays.equals(date.toCharArray(), payment.date.toCharArray());
     }
     @Override
     public int hashCode() {
         int result = Objects.hash(fio, pay);
-        result = 31 * result + Arrays.hashCode(date);
+        result = 31 * result + Arrays.hashCode(date.toCharArray());
         return result;
     }
 
     @Override
     public String toString() {
-        return String.format("Плательщик: %s, дата: %d.%d.%d сумма: %d руб. %d коп.",fio,date[0],date[1],date[2],pay/100,pay%100);
+        return String.format("Плательщик: %s, дата: %s сумма: %d руб. %d коп.",fio, date,pay/100,pay%100);
     }
 }

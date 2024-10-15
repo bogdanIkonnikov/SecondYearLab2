@@ -3,9 +3,9 @@ package org.example;
 public class FinanceReport {
     private Payment[] pays;
     private String fio;
-    private int[] date;
+    private String date;
 
-    public FinanceReport(Payment[] pays, String fio, int[] date) {
+    public FinanceReport(Payment[] pays, String fio, String date) {
         this.pays = pays;
         this.fio = fio;
         this.date = date;
@@ -13,7 +13,7 @@ public class FinanceReport {
     public FinanceReport() {
         this.pays = new Payment[] {};
         this.fio = "none";
-        this.date = new int[] {0,0,0};
+        this.date = "00.00.00";
     }
     public int getQuantityPayments(){
         return pays.length;
@@ -35,9 +35,9 @@ public class FinanceReport {
             }
         }
 
-        return String.format("[Автор: %s, дата: %d.%d.%d" +
+        return String.format("[Автор: %s, дата: " + date +
                 "\nПлатежи: [\n%s ... ]]",
-                fio,date[0],date[1],date[2], Pays);
+                fio, Pays);
     }
     public void copyFrom(FinanceReport financeReport){
         this.pays = financeReport.pays;
