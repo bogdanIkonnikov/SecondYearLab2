@@ -47,4 +47,16 @@ public class FinanceReportProcessorTest {
                 "10.10.24");
         Assertions.assertEquals(6788, FinanceReportProcessor.getPayByDate("02.12.45",financeReport));
     }
+    @Test
+    public void whichYearNoPays(){
+        Payment payment1 = new Payment("Первов Первак Первович", "09.10.05", 1100);
+        Payment payment2 = new Payment("Второв Вторяк Вторович", "01.09.15", 2213);
+        Payment payment3 = new Payment("Третьёв Третьяк Третьевич", "02.12.45", 3394);
+        Payment payment4 = new Payment("Третьёв Третьяк Третьевич", "02.12.45", 3394);
+        FinanceReport financeReport = new FinanceReport(new Payment[] {payment1,payment2,payment3,payment4},
+                "Иконников Богдан Константинович",
+                "10.10.24");
+        Assertions.assertEquals("Список месяцев, в которых не было платежей за 5 год: Январь Февраль Март Апрель Май Июнь Июль Август Сентябрь Ноябрь Декабрь", FinanceReportProcessor.whichYearNoPays(5, financeReport));
+
+    }
 }
