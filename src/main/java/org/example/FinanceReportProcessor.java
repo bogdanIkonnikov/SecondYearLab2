@@ -43,8 +43,8 @@ public class FinanceReportProcessor {
         for(int i = 0; i < report.getQuantityPayments();i++){
             if(report.getPayment(i).getDate().substring(6,8).equals(yearString)){
                 for (int j = 0;j<months.length;j++){
-                    if(report.getPayment(i).getDate().substring(3,5).equals(months[i])){
-                        months[i] = "-";
+                    if(report.getPayment(i).getDate().substring(3,5).equals(months[j])){ //этот иф не работает
+                        months[j] = "-";
                     }
                 }
             }
