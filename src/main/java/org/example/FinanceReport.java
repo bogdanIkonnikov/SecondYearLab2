@@ -1,47 +1,79 @@
 package org.example;
 
-public class FinanceReport {
-    private Payment[] pays;
-    private String fio;
-    private String date;
+import java.util.Arrays;
+import java.util.Objects;
 
-    public FinanceReport(Payment[] pays, String fio, String date) {
-        this.pays = pays;
+public class FinanceReport {
+    private final Payment[] payments;
+    private final String fio;
+    private final String date;
+
+    public FinanceReport(Payment[] payments, String fio, String date) {
+        this.payments = payments;
         this.fio = fio;
         this.date = date;
     }
-    public FinanceReport() {
-        this.pays = new Payment[] {};
-        this.fio = "none";
-        this.date = "00.00.00";
-    }
-    public int getQuantityPayments(){
-        return pays.length;
-    }
-    public Payment getPayment(int index){
-        return pays[index];
-    }
-    public void setPayment(int index,Payment payment){
-        pays[index] = payment;
-    }
-    @Override
-    public String toString(){
-        String Pays = "";
-        for (int index = 0;index<pays.length;index++){
-            if(pays[index] == null) break;
-            else{
-                Pays += pays[index].toString();
-                Pays += "\n";
-            }
+
+    public FinanceReport(FinanceReport financeReport) {
+        this.fio = financeReport.fio;
+        this.date = financeReport.date;
+        this.payments = new Payment[financeReport.payments.length];
+        for (int i = 0; i < financeReport.getQuantityPayments(); i++) {
+            payments[i] = new Payment(
+                    financeReport.getPayment(i).getFio(),
+                    financeReport.getPayment(i).getDay(),
+                    financeReport.getPayment(i).getMonth(),
+                    financeReport.getPayment(i).getYear(),
+                    financeReport.getPayment(i).getPay());
         }
 
-        return String.format("[Автор: %s, дата: " + date +
-                "\nПлатежи: [\n%s ... ]]",
-                fio, Pays);
     }
-    public void copyFrom(FinanceReport financeReport){
-        this.pays = financeReport.pays;
-        this.date = financeReport.date;
-        this.fio = financeReport.fio;
+
+    public FinanceReport() {
+        this.payments = new Payment[]{};
+        this.fio = "none";
+        this.date = "01.01.01";
+    }
+
+    public int getQuantityPayments() {
+        return payments.length;
+    }
+
+    public Payment getPayment(int index) throws IllegalArgumentException {
+        return payments[index];
+    }
+
+    public void setPayment(int index, Payment payment) {
+        payments[index] = payment;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder pays = new StringBuilder();
+        for (int index = 0; index < payments.length; index++) {
+            if (payments[index] == null) break;
+            else {
+                pays.append(payments[index].toString());
+                pays.append("\n");
+            }
+        }
+        return String.format("[Автор: %s, дата: " + date +
+                        ". Платежи: [\n%s ... ]]",
+                fio, pays);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FinanceReport that = (FinanceReport) o;
+        return Arrays.equals(payments, that.payments) && Objects.equals(fio, that.fio) && Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(fio, date);
+        result = 31 * result + Arrays.hashCode(payments);
+        return result;
     }
 }

@@ -37,18 +37,17 @@ public class StringProcessorTest {
 
     @Test
     public void stringDel(){
-        Assertions.assertEquals(new StringBuilder("1111").toString(), StringProcessor.stringDel(new StringBuilder("12121212")).toString());
+        Assertions.assertEquals("1111", StringProcessor.stringDel(new StringBuilder("12121212")).toString());
     }
 
     @Test
     public void stringReverse(){
-        Assertions.assertEquals(" 87  6 5 432   1", StringProcessor.stringReverse(" 12  3 4 567   8"));
-        Assertions.assertEquals(" ab c  d", StringProcessor.stringReverse(" dc b  a"));
+        Assertions.assertEquals(" aaa bbb cc dd", StringProcessor.stringReverse(" dd cc bbb aaa"));
     }
 
     @Test
     public void numbs(){
         Assertions.assertEquals("Мне 11 лет 0", StringProcessor.numbs("Мне 0x0000000B лет 0x00000000"));
-        Assertions.assertEquals("345", StringProcessor.numbs("0x000000030x000000040x00000005"));
+        Assertions.assertEquals("37 45", StringProcessor.numbs("0x000000037 0x000000040x00000005"));
     }
 }

@@ -2,8 +2,10 @@ package org.example;
 
 
 public class FinanceReportProcessor {
-    public static FinanceReport getPaymentsSecondName(FinanceReport report,char character){
+    public static FinanceReport getPaymentsSecondName(FinanceReport report, char character){
         Payment[] payments = new Payment[report.getQuantityPayments()];
+
+        // ArrayList vs two for
         int j = 0;
         for (int i = 0; i < report.getQuantityPayments(); i++){
             if (report.getPayment(i).getFio().charAt(0) == character) {
@@ -24,34 +26,31 @@ public class FinanceReportProcessor {
         }
         return new FinanceReport(payments,"Finance Report Processor", "09.10.05");
     }
-    public static int getPayByDate(String date, FinanceReport report){
+    public static int getPayByDate(int day, int month, int year, FinanceReport report){
         int sum = 0;
         for(int i = 0; i < report.getQuantityPayments();i++){
-            if(report.getPayment(i).getDate().equals(date)){
+            if(report.getPayment(i).getDay() == day && report.getPayment(i).getMonth() == month && report.getPayment(i).getYear() == year){
                 sum += report.getPayment(i).getPay();
             }
         }
         return sum;
     }
     public static String whichYearNoPays(int year, FinanceReport report){
-        String yearString;
         StringBuilder result = new StringBuilder("Список месяцев, в которых не было платежей за " + year + " год: ");
-        if(year/10 == 0 && year != 10) yearString = "0" + year;
-        else yearString = "" + year;
-        String[] months = new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+        int[] months = new int[] {1,2,3,4,5,6,7,8,9,10,11,12};
 
         for(int i = 0; i < report.getQuantityPayments();i++){
-            if(report.getPayment(i).getDate().substring(6,8).equals(yearString)){
+            if(report.getPayment(i).getYear() == year){
                 for (int j = 0;j<months.length;j++){
-                    if(report.getPayment(i).getDate().substring(3,5).equals(months[j])){ //этот иф не работает
-                        months[j] = "-";
+                    if(report.getPayment(i).getMonth() == months[j]){ //этот иф не работает
+                        months[j] = 0;
                     }
                 }
             }
         }
 
         for (int i = 0;i<months.length;i++) {
-            if(!months[i].equals("-")){
+            if(!(months[i] == 0)){
                 switch (i) {
                     case (0) -> result.append("Январь ");
                     case (1) -> result.append("Февраль ");

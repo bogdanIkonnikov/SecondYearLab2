@@ -1,15 +1,18 @@
 package org.example;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Payment {
     private String fio;
-    private String date;
+    private int day;
+    private int month;
+    private int year;
     private int pay;
-    public Payment(String fio, String date, int pay) {
+    public Payment(String fio, int day, int month, int year, int pay) {
         this.fio = fio;
-        this.date = date;
+        this.day = day;
+        this.month = month;
+        this.year = year;
         this.pay = pay;
     }
 
@@ -19,34 +22,46 @@ public class Payment {
     public String getFio() {
         return fio;
     }
-    public String getDate() {
-        return date;
+    public int getDay() {
+        return day;
+    }
+    public int getMonth() {
+        return month;
+    }
+    public int getYear() {
+        return year;
     }
     public void setFio(String fio) {
         this.fio = fio;
     }
-    public void setDate(String date) {
-        this.date = date;
+    public void setDay(int day) {
+        this.day = day;
+    }
+    public void setMonth(int month) {
+        this.month = month;
+    }
+    public void setYear(int year) {
+        this.year = year;
     }
     public void setPay(int pay) {
         this.pay = pay;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return pay == payment.pay && fio.equals(payment.fio) && Arrays.equals(date.toCharArray(), payment.date.toCharArray());
+        return day == payment.day && month == payment.month && year == payment.year && pay == payment.pay && Objects.equals(fio, payment.fio);
     }
+
     @Override
     public int hashCode() {
-        int result = Objects.hash(fio, pay);
-        result = 31 * result + Arrays.hashCode(date.toCharArray());
-        return result;
+        return Objects.hash(fio, day, month, year, pay);
     }
 
     @Override
     public String toString() {
-        return String.format("Плательщик: %s, дата: %s сумма: %d руб. %d коп.",fio, date,pay/100,pay%100);
+        return String.format("Плательщик: %s, дата: %d.%d.%d сумма: %d руб. %d коп.",fio,day,month,year,pay/100,pay%100);
     }
 }

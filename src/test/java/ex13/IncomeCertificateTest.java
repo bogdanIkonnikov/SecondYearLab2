@@ -30,8 +30,14 @@ public class IncomeCertificateTest {
     }
     @Test
     public void getIncome(){
-        Assertions.assertEquals(new int[] {
-
+        Assertions.assertArrayEquals(new int[] {
+                1000,   //1000
+                2000,   //3000
+                4000,   //7000
+                10000,  //17000
+                40000,  //57000
+                500000, //557000
+                1000000 //1557000
         }, incomeCertificate.getIncome());
     }
 
