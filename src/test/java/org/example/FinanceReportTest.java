@@ -18,7 +18,7 @@ public class FinanceReportTest {
     }
 
     @Test
-    public void getSet() {
+    public void getSet() throws Exception {
         Payment payment1 = new Payment("Первов Первак Первович", 9,10,5, 1100);
         Payment payment2 = new Payment("Второв Вторяк Вторович", 1,11,15, 2213);
         FinanceReport financeReport = new FinanceReport(new Payment[]{payment1, payment2},
@@ -29,7 +29,7 @@ public class FinanceReportTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toStringTest1() {
         Payment payment1 = new Payment("Первов Первак Первович", 9,10,5, 1100);
         Payment payment2 = new Payment("Второв Вторяк Вторович", 1,11,15, 2213);
         FinanceReport financeReport = new FinanceReport(new Payment[]{payment1, payment2},
@@ -39,7 +39,17 @@ public class FinanceReportTest {
                 [Автор: Иконников Богдан Константинович, дата: 10.10.24. Платежи: [
                 Плательщик: Первов Первак Первович, дата: 9.10.5 сумма: 11 руб. 0 коп.
                 Плательщик: Второв Вторяк Вторович, дата: 1.11.15 сумма: 22 руб. 13 коп.
-                 ... ]]""", financeReport.toString());
+                ]]""", financeReport.toString());
+    }
+
+    @Test
+    public void toStringTest2() {
+        FinanceReport financeReport = new FinanceReport(new Payment[]{},
+                "Иконников Богдан Константинович",
+                "10.10.24");
+        Assertions.assertEquals("""
+                [Автор: Иконников Богдан Константинович, дата: 10.10.24. Платежи: [
+                ]]""", financeReport.toString());
     }
 
     @Test

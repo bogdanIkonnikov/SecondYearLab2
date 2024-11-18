@@ -36,7 +36,6 @@ public class FinanceReportProcessor {
         return sum;
     }
     public static String whichYearNoPays(int year, FinanceReport report){
-        StringBuilder result = new StringBuilder("Список месяцев, в которых не было платежей за " + year + " год: ");
         int[] months = new int[] {1,2,3,4,5,6,7,8,9,10,11,12};
 
         for(int i = 0; i < report.getQuantityPayments();i++){
@@ -49,8 +48,9 @@ public class FinanceReportProcessor {
             }
         }
 
+        StringBuilder result = new StringBuilder("Список месяцев, в которых не было платежей за " + year + " год: ");
         for (int i = 0;i<months.length;i++) {
-            if(!(months[i] == 0)){
+            if(months[i] != 0){
                 switch (i) {
                     case (0) -> result.append("Январь ");
                     case (1) -> result.append("Февраль ");

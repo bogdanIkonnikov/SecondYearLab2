@@ -44,6 +44,10 @@ public class StringProcessorTest {
     public void stringReverse(){
         Assertions.assertEquals(" aaa bbb cc dd", StringProcessor.stringReverse(" dd cc bbb aaa"));
     }
+    @Test
+    public void stringReverse1(){
+        Assertions.assertEquals("", StringProcessor.stringReverse(""));
+    }
 
     @Test
     public void numbs(){

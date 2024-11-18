@@ -39,10 +39,9 @@ public class StringProcessor {
     }
 
     public static String stringReverse(String string) {
-        String[] arr = new String[string.length()];
         StringBuilder stringBuilder = new StringBuilder();
         String buffer;
-        int k = 0;
+        /*int k = 0;
         int index = 0;
         for (int i = 0; i < string.length();) {
             if (string.charAt(i) != ' '){
@@ -77,6 +76,7 @@ public class StringProcessor {
             }
 
         }
+
         int j = arr.length - 1;
         for (int i = 0; i < arr.length; i++){
             if (!arr[i].startsWith(" ")){
@@ -91,10 +91,34 @@ public class StringProcessor {
                 j--;
             }
         }
+        */
 
-        for (String i : arr) {
-            if (i != null) {
-                stringBuilder.append(i);
+        String[] arr = string.split(" ");
+        int j = arr.length - 1;
+        for (int i = 0; i < string.length(); ++i) {
+            if (!arr[i].equals("")) {
+                while (arr[j].equals("")) {
+                    j--;
+                    if (i == j || i > j) break;
+                }
+                if (i == j || i > j) break;
+                buffer = arr[i];
+                arr[i] = arr[j];
+                arr[j] = buffer;
+                j--;
+            }
+        }
+        if (string.length() != 0) {
+            for (int i =0; i < arr.length; ++i) {
+                if (!arr[i].equals("")) {
+                    stringBuilder.append(arr[i]);
+                    if (i != arr.length - 1){
+                        stringBuilder.append(" ");
+                    }
+                }
+                else {
+                    stringBuilder.append(" ");
+                }
             }
         }
 

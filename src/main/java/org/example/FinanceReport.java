@@ -18,7 +18,7 @@ public class FinanceReport {
         this.fio = financeReport.fio;
         this.date = financeReport.date;
         this.payments = new Payment[financeReport.payments.length];
-        for (int i = 0; i < financeReport.getQuantityPayments(); i++) {
+        for (int i = 0; i < financeReport.getQuantityPayments(); ++i) {
             payments[i] = new Payment(
                     financeReport.getPayment(i).getFio(),
                     financeReport.getPayment(i).getDay(),
@@ -39,7 +39,7 @@ public class FinanceReport {
         return payments.length;
     }
 
-    public Payment getPayment(int index) throws IllegalArgumentException {
+    public Payment getPayment(int index) {
         return payments[index];
     }
 
@@ -50,15 +50,12 @@ public class FinanceReport {
     @Override
     public String toString() {
         StringBuilder pays = new StringBuilder();
-        for (int index = 0; index < payments.length; index++) {
-            if (payments[index] == null) break;
-            else {
-                pays.append(payments[index].toString());
-                pays.append("\n");
-            }
+        for (Payment payment : payments) {
+            if (payment == null) break;
+            pays.append(payment).append(System.lineSeparator());
         }
         return String.format("[Автор: %s, дата: " + date +
-                        ". Платежи: [\n%s ... ]]",
+                        ". Платежи: [\n%s]]",
                 fio, pays);
     }
 

@@ -23,9 +23,13 @@ public class PaymentTest {
     public void equals(){
         Payment payment1 = new Payment("Фамилия Имя Отчество", 9,10,2005, 11111);
         Payment payment2 = new Payment("Фамилия Имя Отчество", 9,10,2005, 11111);
-        Assertions.assertTrue(payment1.equals(payment2));
-        payment1.setFio("123");
-        Assertions.assertFalse(payment1.equals(payment2));
+        Assertions.assertEquals(payment1, payment2);
+    }
+    @Test
+    public void notEquals(){
+        Payment payment1 = new Payment("Фамилия Имя Отчество", 9,10,2005, 11111);
+        Payment payment2 = new Payment("Фамили Ия Отчесво", 1,10,2005, 11211);
+        Assertions.assertNotEquals(payment1, payment2);
     }
 
     @Test
